@@ -7,6 +7,13 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/material.module';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'contactmanager', loadChildren: () => import('./contactmanager/contactmanager.module').then(m => m.ContactmanagerModule)},
+  { path: 'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)},
+  { path: '**', redirectTo: 'contactmanager' }
+];
 
 @NgModule({
   declarations: [
@@ -19,7 +26,8 @@ import { MaterialModule } from './shared/material.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
